@@ -6,27 +6,42 @@ $dbname = "library_registrationdb";
 
 $connect = new mysqli($servername, $username, $password, $dbname);
 
-if ($connect->connect_error) {
-    die("connect this database failed due to." . $connect->connect_error);
+$full_name="";
+$email="";
+$password="";
+
+$errorMessage= "";
+$successMessage= "";
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $full_name = $_POST['full_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+do {
+        if (empty($full_name) || empty($email) || empty($password)) {
+            $errorMessage = "all the fields required";
+            break;
+        }
+        // add new kitap kaydı to database
+
+            $sql = "insert into logintablo(full_name, email, password) VALUES ('$full_name', '$email', '$password');";
+        $result = $connect->query($sql);
+
+        if (!$result) {
+            $errorMessage= "error: $sql <br> $connect->error";
+			break;
+        }
+        $full_name="";
+		$email="";
+		$password="";
+        $successMessage = "kitap kaydı eklendi";
+        header("location:login.php");
+		exit;
+    }
+        while (false);
 }
-
-$full_name = $_POST['full_name'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$sql = "insert into logintablo(full_name, email, password) VALUES ('$full_name', '$email', '$password');";
-
-if ($connect->query($sql) == true) {
-    echo "you are successfully registered.";
-    header('location:login.php');
-} else {
-    echo "error: $sql <br> $connect->error";
-}
-
-$connect->close();
-
+    $connect->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,7 +105,7 @@ $connect->close();
                     <a href="edit.php" class="btn btn-outline-warning">Kitap Ekle</a>
                     <a href="index.php" class="btn btn-outline-danger">Kitap Güncelle</a>
                     <a href="index.php" class="btn btn-outline-warning">Kitap Sil</a>
-                </div>
+				</div>
             </div>
         </div>
     </nav>
@@ -100,13 +115,22 @@ $connect->close();
     <article> <!--index bölümü------->
 
         <div class="container">
+            <?php
+            if(!empty($errorMessage)){
+                echo "
+                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                <strong>$errorMessage</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+            }
+            ?>
             <form  method="post">
                 <div class="row">
                     <div class="column-1">
                         <label>Ad-soyad:</label>
                     </div>
                     <div class="column-2">
-                        <input type="text" name="full_name" required>
+                        <input type="text" name="full_name" value="<?php echo $full_name; ?>" required>
                         <span class="message"></span>
                     </div>
                 </div>
@@ -116,7 +140,7 @@ $connect->close();
                         <label>Email:</label>
                     </div>
                     <div class="column-2">
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" value="<?php echo $email; ?>" required>
                         <span class="message"></span>
                     </div>
                 </div>
@@ -126,10 +150,25 @@ $connect->close();
                         <label>Password:</label>
                     </div>
                     <div class="column-2">
-                        <input type="password" name="password" required>
+                        <input type="password" name="password" value="<?php echo $password; ?>" required>
                         <span class="password"></span>
                     </div>
                 </div>
+
+                <?php
+                if(!empty($successMessage)){
+                    echo"
+                    <div class='row'>
+                    	<div class='column-1'>
+                    		<div class='alert alert-success alert-dismissable fade show' role='alert'>
+                    			<strong>$successMessage</strong>
+                    			<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    		</div>
+                    	</div>
+                    </div>
+                    ";
+                }
+                ?>
                 <div class="row">
                     <div class="column-1">
                         <label></label>
@@ -139,10 +178,51 @@ $connect->close();
 						<a class="btn btn-outline-primary" href="index.php" role="button">CANCEL</a>
                     </div>
                 </div>
+			</form>
 
+		<table class="table table-hover table-scripted">
+			<thead>
+			<tr>
+				<th>Ad Soyad</th>
+				<th>email</th>
+				<th>password</th>
+				<td>
+					<div class="btn-group">
+						<a href="login.php" class="btn btn-success">Ekle</a>
+					</div>
+				</td>
+			</tr>
+			</thead>
+			<tbody>
+            <?php
 
-                </div>
-            </form>
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "library_registrationdb";
+
+            $connect = new mysqli($servername, $username, $password, $dbname);
+            if ($connect->connect_error) {
+                die("connect this database failed due to." . $connect->connect_error);
+            }
+            $sql = "select * from logintablo";
+            $result = $connect->query($sql);
+            /*$rowdata= isset($rowdata['rowdata']);*/
+
+            //if($result -> num_rows> 0){
+            while($rowdata = $result->fetch_assoc()){
+                echo "
+							<tr>
+                            	<td>$rowdata[full_name]</td>
+                            	<td>$rowdata[email]</td>
+                            	<td>$rowdata[password]</td>
+                            </tr>
+							";
+            }
+            // }
+            ?>
+			</tbody>
+		</table>
         </div>
 
     </article>
