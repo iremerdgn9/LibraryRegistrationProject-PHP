@@ -102,9 +102,9 @@ do {
             <div class="column-1">
                 <div class="btn btn btn btn-group-vertical">
                     <a href="index.php" class="btn btn-outline-danger">Tüm Kitaplar</a>
-                    <a href="edit.php" class="btn btn-outline-warning">Kitap Ekle</a>
-                    <a href="index.php" class="btn btn-outline-danger">Kitap Güncelle</a>
-                    <a href="index.php" class="btn btn-outline-warning">Kitap Sil</a>
+                    <a href="create.php" class="btn btn-outline-warning">Kitap Ekle</a>
+                    <a href="edit.php" class="btn btn-outline-danger">Kitap Güncelle</a>
+                    <a href="delete.php" class="btn btn-outline-warning">Kitap Sil</a>
 				</div>
             </div>
         </div>

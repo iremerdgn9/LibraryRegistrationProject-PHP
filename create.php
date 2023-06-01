@@ -154,7 +154,8 @@ document.getElementById("tt").innerHTML= "irem erdoğan";
 						<label>Türü:</label>
 					</div>
 					<div class="column-2">
-						<input type="radio" value="<?php echo $tür; ?>" id="roman" name="tür" value="roman" required>
+						<input type="hidden" value="<?php echo $tür; ?>">
+						<input type="radio" id="roman" name="tür" value="roman" required>
 						<label for="roman">Roman</label><br>
 						<input type="radio" id="hikaye" name="tür" value="hikaye" required>
 						<label for="hikaye">Hikaye</label><br>

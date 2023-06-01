@@ -26,8 +26,8 @@
 				<div class="button">
                     <a href="index.php" class="btn btn-outline-success">Tüm Kitaplar</a>
                     <a href="create.php" class="btn btn-outline-warning"> Kitap ekle</a>
-                    <a href="index.php" class="btn btn-outline-info">Kitap güncelle</a>
-                    <a href="index.php" class="btn btn-outline-danger">Kitap sil</a>
+                    <a href="edit.php" class="btn btn-outline-info">Kitap güncelle</a>
+                    <a href="delete.php" class="btn btn-outline-danger">Kitap sil</a>
                 </div>
 			</div>
 				<div class="col-sm-4">
@@ -58,8 +58,8 @@
                     <div class="btn btn btn btn-group-vertical">
                     <a href="index.php" class="btn btn-outline-danger">Tüm Kitaplar</a>
                     <a href="create.php" class="btn btn-outline-warning">Kitap Ekle</a>
-                    <a href="index.php" class="btn btn-outline-danger">Kitap Güncelle</a>
-                    <a href="index.php" class="btn btn-outline-warning">Kitap Sil</a>
+                    <a href="edit.php" class="btn btn-outline-danger">Kitap Güncelle</a>
+                    <a href="delete.php" class="btn btn-outline-warning">Kitap Sil</a>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                             	<td>$rowdata[yazar]</td>
                             	<td>$rowdata[tür]</td>
                             	<td>
-									<a href='update.php?kitap_id=$rowdata[kitap_id]' class='btn btn-secondary'>Güncelle</a>
+									<a href='edit.php?kitap_id=$rowdata[kitap_id]' class='btn btn-secondary'>Güncelle</a>
 									<a href='delete.php?kitap_id=$rowdata[kitap_id]' class='btn btn-danger'>Kaldır</a>
 								</td>
                             </tr>
