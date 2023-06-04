@@ -3,8 +3,7 @@
 
 
 
-![](https://github.com/iremerdgn9/LibraryRegistrationProject-PHP/assets/47084468/3bda5756-2daa-4035-8696-ece5d4e17ebf)
-
+https://github.com/iremerdgn9/LibraryRegistrationProject-PHP/assets/47084468/3bda5756-2daa-4035-8696-ece5d4e17ebf
 
 
 ![ana sayfa](https://i.hizliresim.com/swiv727.png)
